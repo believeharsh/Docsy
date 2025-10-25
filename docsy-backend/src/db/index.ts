@@ -1,16 +1,15 @@
 import mongoose from 'mongoose';
-import { Db_Name } from '../constants/dbName';
+import { initializePinecone } from '../configs/pinecone';
 
-const connectDB = async () => {
+const connectDB = async (): Promise<void> => {
   try {
-    const connectionInstance = await mongoose.connect(
-      `${process.env.MONGO_URI}/${Db_Name}`
-    );
-    console.log(
-      `\n MongoDB connected !! DB HOST: ${connectionInstance.connection.host}`
-    );
+    const conn = await mongoose.connect(process.env.MONGO_URI as string);
+
+    await initializePinecone() ; 
+
+    console.log(`✅ MongoDB Connected: ${conn.connection.host}`);
   } catch (error) {
-    console.log('MONGODB connection FAILED ', error);
+    console.error(`❌ MongoDB Connection Error:`, error);
     process.exit(1);
   }
 };

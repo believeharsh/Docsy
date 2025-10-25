@@ -1,26 +1,48 @@
-import express, { Request, Response } from 'express';
-import dotenv from 'dotenv';
+// src/app.ts
+import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import helmet from 'helmet';
-
-dotenv.config();
+import uploadRoutes from './routes/uploads.route.js';
+import chatRoutes from './routes/chats.route.js';
 
 const app = express();
-const PORT = process.env.PORT || 4000;
 
 // middlewares
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
-// route
+// Routes
+app.use('/api/upload', uploadRoutes);
+app.use('/api/chat', chatRoutes);
+
+// Health check route
+app.get('/api/health', (req: Request, res: Response) => {
+  res.json({ 
+    status: 'ok', 
+    message: 'Docsy Backend is running!',
+    timestamp: new Date().toISOString()
+  });
+});
+
+// Root route
 app.get('/', (req: Request, res: Response) => {
-  res.send('🚀 Basic Express + TypeScript server is running!');
+  res.send('🚀 Docsy Backend is running!');
 });
 
-app.listen(PORT, () => {
-  console.log(`Server started on http://localhost:${PORT}`);
+// Error handling middleware
+app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
+  console.error('Error:', err);
+  res.status(500).json({ 
+    error: 'Internal server error',
+    message: err.message 
+  });
 });
 
+// ❌ REMOVE THIS - Don't start server here!
+// app.listen(PORT, () => {
+//   console.log(`Server started on http://localhost:${PORT}`);
+// });
 
-export {app} ; 
+// ✅ Only export app
+export { app };
