@@ -1,5 +1,3 @@
-// src/types/index.ts
-
 export interface Document {
   id: string;
   filename: string;
