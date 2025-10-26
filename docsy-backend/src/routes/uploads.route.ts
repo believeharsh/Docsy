@@ -103,7 +103,8 @@ uploadRoutes.post('/', upload.single('pdf'), async (req: Request, res: Response)
       success: true,
       document: {
         id: document._id,
-        filename: document.originalName,
+        filename: document.filename,
+        originalName: document.originalName,
         totalPages: document.totalPages,
         status: document.status,
       },
