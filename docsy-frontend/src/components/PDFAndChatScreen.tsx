@@ -23,7 +23,7 @@ const PDFAndChatScreen: React.FC = () => {
       {/* PDF Viewer - Left Side */}
       <div className="flex-1 bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden">
         <PDFViewer
-          fileUrl={`${import.meta.env.VITE_API_URL || 'http://localhost:8000'}/api/upload/file/${document.filename}`}
+          fileUrl={`${import.meta.env.VITE_SERVER_ORIGIN || 'http://localhost:8000'}/api/upload/file/${document.filename}`}
         />
       </div>
 
