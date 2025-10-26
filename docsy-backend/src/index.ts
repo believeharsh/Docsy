@@ -4,7 +4,7 @@ dotenv.config();
 
 console.log('🔍 Environment Check:');
 console.log('GROQ_API_KEY:', process.env.GROQ_API_KEY ? '✅ Loaded' : '❌ Missing');
-console.log('HUGGINGFACE_API_KEY:', process.env.HUGGING_FACE_TOKEN ? '✅ Loaded' : '❌ Missing');
+console.log('HUGGINGFACE_API_KEY:', process.env.HUGGINGFACE_API_KEY ? '✅ Loaded' : '❌ Missing');
 console.log('PINECONE_API_KEY:', process.env.PINECONE_API_KEY ? '✅ Loaded' : '❌ Missing');
 console.log('MONGODB_URI:', process.env.MONGO_URI ? '✅ Loaded' : '❌ Missing');
 console.log('');
