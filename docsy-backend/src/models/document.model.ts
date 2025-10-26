@@ -1,5 +1,4 @@
-// src/models/Document.ts
-import mongoose, { Document as MongooseDocument, Schema } from 'mongoose';
+import mongoose, { Schema, Document as MongooseDocument } from 'mongoose';
 
 export interface IDocument extends MongooseDocument {
   filename: string;
@@ -7,10 +6,11 @@ export interface IDocument extends MongooseDocument {
   fileSize: number;
   mimeType: string;
   totalPages: number;
+  status: 'processing' | 'completed' | 'failed';
+  cloudinaryUrl?: string; 
   uploadedAt: Date;
   processedAt?: Date;
-  status: 'uploading' | 'processing' | 'completed' | 'failed';
-  vectorIds: string[];
+  vectorIds?: string[];
 }
 
 const documentSchema = new Schema<IDocument>({
@@ -32,7 +32,15 @@ const documentSchema = new Schema<IDocument>({
   },
   totalPages: {
     type: Number,
-    required: true,
+    default: 0,
+  },
+  status: {
+    type: String,
+    enum: ['processing', 'completed', 'failed'],
+    default: 'processing',
+  },
+  cloudinaryUrl: {
+    type: String, // Add this field
   },
   uploadedAt: {
     type: Date,
@@ -40,11 +48,6 @@ const documentSchema = new Schema<IDocument>({
   },
   processedAt: {
     type: Date,
-  },
-  status: {
-    type: String,
-    enum: ['uploading', 'processing', 'completed', 'failed'],
-    default: 'uploading',
   },
   vectorIds: [{
     type: String,
