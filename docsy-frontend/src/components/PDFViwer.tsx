@@ -1,14 +1,11 @@
-// src/components/PDFViewer.tsx
 import React, { useState, useEffect } from 'react';
 import { Document, Page, pdfjs } from 'react-pdf';
 import { ChevronLeft, ChevronRight, ZoomIn, ZoomOut } from 'lucide-react';
 import { useApp } from '../context/AppContext';
 
-
 import 'react-pdf/dist/Page/AnnotationLayer.css';
 import 'react-pdf/dist/Page/TextLayer.css';
 
-// Set up PDF.js worker
 pdfjs.GlobalWorkerOptions.workerSrc = `//unpkg.com/pdfjs-dist@${pdfjs.version}/build/pdf.worker.min.mjs`;
 
 interface PDFViewerProps {
@@ -59,7 +56,7 @@ const PDFViewer: React.FC<PDFViewerProps> = ({ fileUrl }) => {
             <ChevronLeft className="w-5 h-5 text-gray-700" />
           </button>
           
-          <span className="text-sm font-medium text-gray-700 min-w-[80px] text-center">
+          <span className="text-sm font-medium text-gray-700 min-w-20 text-center">
             {currentPage} / {numPages}
           </span>
           

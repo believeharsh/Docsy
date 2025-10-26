@@ -1,4 +1,3 @@
-// src/components/ChatInterface.tsx
 import React, { useState, useRef, useEffect } from 'react';
 import { Send, Sparkles } from 'lucide-react';
 import { useApp } from '../context/AppContext';
@@ -68,7 +67,7 @@ const ChatInterface: React.FC = () => {
   ];
 
   return (
-    <div className="h-full flex flex-col bg-gradient-to-b from-white to-gray-50">
+    <div className="h-full flex flex-col bg-linear-to-b from-white to-gray-50">
       {/* Header */}
       <div className="bg-white border-b border-gray-200 px-6 py-4">
         <div className="flex items-center gap-2">
@@ -139,7 +138,7 @@ const ChatInterface: React.FC = () => {
           <button
             type="submit"
             disabled={isLoading || !input.trim() || !document}
-            className="px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2 font-medium"
+            className="cursor-pointer px-6 py-3 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 disabled:opacity-50 disabled:cursor-not-allowed transition-colors flex items-center gap-2 font-medium"
           >
             <Send className="w-4 h-4" />
             Send

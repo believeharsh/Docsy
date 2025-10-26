@@ -1,12 +1,11 @@
-// src/components/FileUpload.tsx
 import React, { useRef, useState } from 'react';
-import { Upload, File, X } from 'lucide-react';
+import { Upload } from 'lucide-react';
 import { uploadPDF } from '../services/api';
 import { useApp } from '../context/AppContext';
 import LoadingSpinner from './LoadingSpinner';
 
 const FileUpload: React.FC = () => {
-  const { setDocument, setLoading, setError, clearMessages } = useApp();
+  const { setDocument, setError, clearMessages } = useApp();
   const [isDragging, setIsDragging] = useState(false);
   const [uploading, setUploading] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -73,7 +72,7 @@ const FileUpload: React.FC = () => {
           </p>
           <button
             onClick={() => fileInputRef.current?.click()}
-            className="px-6 py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium transition-colors"
+            className="cursor-pointer px-6 py-2.5 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium transition-colors"
           >
             Choose File
           </button>

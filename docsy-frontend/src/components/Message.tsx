@@ -1,4 +1,3 @@
-// src/components/Message.tsx
 import React from 'react';
 import { User, Bot } from 'lucide-react';
 import type { Message as MessageType } from '../types';
@@ -46,7 +45,7 @@ const Message: React.FC<MessageProps> = ({ message }) => {
   return (
     <div className={`flex gap-3 ${isUser ? 'justify-end' : 'justify-start'}`}>
       {!isUser && (
-        <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center flex-shrink-0">
+        <div className="w-8 h-8 rounded-full bg-indigo-100 flex items-center justify-center shrink-0">
           <Bot className="w-5 h-5 text-indigo-600" />
         </div>
       )}
@@ -66,7 +65,7 @@ const Message: React.FC<MessageProps> = ({ message }) => {
       </div>
 
       {isUser && (
-        <div className="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center flex-shrink-0">
+        <div className="w-8 h-8 rounded-full bg-indigo-600 flex items-center justify-center shrink-0">
           <User className="w-5 h-5 text-white" />
         </div>
       )}
