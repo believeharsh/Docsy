@@ -1,8 +1,8 @@
-// src/routes/upload.ts
 import express, { Request, Response } from 'express';
 import multer from 'multer';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { Types } from 'mongoose';
 import Document from '../models/document.model';
 import { extractTextFromPDF, chunkTextByPage } from '../services/pdfService';
 import { generateEmbeddings } from '../services/embeddingService';
@@ -60,6 +60,8 @@ uploadRoutes.post('/', upload.single('pdf'), async (req: Request, res: Response)
     });
     await document.save();
 
+    const documentId = (document._id as Types.ObjectId).toString();
+
     // 2. Extract text from PDF
     const { text, numPages } = await extractTextFromPDF(req.file.path);
     document.totalPages = numPages;
@@ -79,17 +81,17 @@ uploadRoutes.post('/', upload.single('pdf'), async (req: Request, res: Response)
     console.log('💾 Storing in Pinecone...');
     const index = getPineconeIndex();
     const vectors: PineconeVector[] = chunks.map((chunk, idx) => ({
-      id: `${document._id}_page_${chunk.pageNumber}`,
+      id: `${documentId}_page_${chunk.pageNumber}`,
       values: embeddings[idx],
       metadata: {
-        documentId: document._id.toString(),
+        documentId: documentId,
         pageNumber: chunk.pageNumber,
         text: chunk.text.substring(0, 1000), // Store first 1000 chars
         filename: document.originalName,
       },
     }));
 
-  await index.upsert(vectors);
+    await index.upsert(vectors as any);
 
     // 6. Update document status
     document.status = 'completed';
@@ -102,7 +104,7 @@ uploadRoutes.post('/', upload.single('pdf'), async (req: Request, res: Response)
     res.json({
       success: true,
       document: {
-        id: document._id,
+        id: documentId,
         filename: document.filename,
         originalName: document.originalName,
         totalPages: document.totalPages,
@@ -129,7 +131,7 @@ uploadRoutes.get('/:id', async (req: Request, res: Response): Promise<any> => {
     }
 
     res.json({
-      id: document._id,
+      id: (document._id as Types.ObjectId).toString(),
       filename: document.originalName,
       totalPages: document.totalPages,
       status: document.status,

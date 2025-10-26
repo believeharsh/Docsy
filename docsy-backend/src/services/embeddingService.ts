@@ -1,7 +1,6 @@
-// src/services/embeddingService.ts
 import { HfInference } from '@huggingface/inference';
 
-// ✅ Lazy initialization
+// Lazy initialization
 let hfClient: HfInference | null = null;
 
 const getHfClient = (): HfInference => {
@@ -26,7 +25,17 @@ export const generateEmbedding = async (text: string): Promise<number[]> => {
       inputs: text,
     });
     
-    return Array.isArray(embedding[0]) ? embedding[0] : embedding as number[];
+    // Fixed: Properly handle the response type
+    if (Array.isArray(embedding) && embedding.length > 0) {
+      // If it's a 2D array (batch response), return the first element
+      if (Array.isArray(embedding[0])) {
+        return embedding[0] as number[];
+      }
+      // If it's already a 1D array, return it
+      return embedding as number[];
+    }
+    
+    throw new Error('Invalid embedding response format');
   } catch (error) {
     console.error('Error generating embedding:', error);
     throw new Error('Failed to generate embedding');

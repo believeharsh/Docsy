@@ -1,5 +1,3 @@
-// src/types/index.ts
-
 export interface PDFChunk {
   text: string;
   pageNumber: number;
@@ -16,6 +14,7 @@ export interface PineconeMetadata {
   pageNumber: number;
   text: string;
   filename: string;
+  [key: string]: string | number | boolean | string[] | null; // Index signature for Pinecone compatibility
 }
 
 export interface PineconeVector {
