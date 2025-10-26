@@ -22,6 +22,7 @@ const FileUpload: React.FC = () => {
 
     try {
       const response = await uploadPDF(file);
+      console.log("response is this", response) ; 
       setDocument(response.document);
     } catch (err: any) {
       setError(err.response?.data?.error || 'Failed to upload PDF');

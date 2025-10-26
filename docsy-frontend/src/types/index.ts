@@ -4,6 +4,7 @@ export interface Document {
   totalPages: number;
   status: 'uploading' | 'processing' | 'completed' | 'failed';
   uploadedAt?: string;
+  pdfUrl?: string;
 }
 
 export interface Message {

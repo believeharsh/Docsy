@@ -18,13 +18,23 @@ const PDFAndChatScreen: React.FC = () => {
     );
   }
 
+  // Get PDF URL - use pdfUrl if available (production/Cloudinary), otherwise construct local URL
+  const getPdfUrl = () => {
+    // If backend returned pdfUrl (Cloudinary URL in production), use it directly
+    if (document.pdfUrl) {
+      return document.pdfUrl;
+    }
+    
+    // Otherwise, construct local file URL (development)
+    const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+    return `${baseUrl}/api/upload/file/${document.filename}`;
+  };
+
   return (
     <div className="h-full flex gap-6">
       {/* PDF Viewer - Left Side */}
       <div className="flex-1 bg-white rounded-3xl shadow-xl border border-slate-200 overflow-hidden">
-        <PDFViewer
-          fileUrl={`${import.meta.env.VITE_SERVER_ORIGIN || 'http://localhost:8000'}/api/upload/file/${document.filename}`}
-        />
+        <PDFViewer fileUrl={getPdfUrl()} />
       </div>
 
       {/* Chat Interface - Right Side */}
