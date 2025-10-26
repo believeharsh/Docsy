@@ -1,4 +1,3 @@
-// src/context/AppContext.tsx
 import React, { createContext, useContext, useState, type ReactNode } from 'react';
 import type { Document, Message, AppState } from '../types';
 
