@@ -1,0 +1,40 @@
+Primary: #6366f1 (Indigo - professional, modern)
+Secondary: #8b5cf6 (Purple - creative)
+Success: #10b981 (Green)
+Background: #ffffff (White)
+Surface: #f9fafb (Light gray)
+Border: #e5e7eb (Subtle gray)
+Text: #111827 (Almost black)
+Text Secondary: #6b7280 (Gray)
+```
+
+### **Design Style:**
+- 🎨 Glassmorphism cards
+- 📱 Responsive (mobile-first)
+- 🌊 Smooth animations
+- 🎯 Clean spacing
+- 📐 Modern typography (Inter font)
+
+---
+
+## 📁 **Folder Structure**
+```
+src/
+├── components/           # Reusable components
+│   ├── PDFViewer.tsx    # PDF display
+│   ├── ChatInterface.tsx # Chat UI
+│   ├── FileUpload.tsx   # Upload component
+│   ├── Message.tsx      # Single message
+│   ├── CitationButton.tsx # Citation badges
+│   └── LoadingSpinner.tsx # Loading state
+├── context/             # State management
+│   └── AppContext.tsx   # Global state
+├── services/            # API calls
+│   └── api.ts           # Axios instance
+├── types/               # TypeScript types
+│   └── index.ts         # Type definitions
+├── utils/               # Helper functions
+│   └── helpers.ts       # Utilities
+├── App.tsx              # Main app
+├── main.tsx             # Entry point
+└── index.css            # Global styles
