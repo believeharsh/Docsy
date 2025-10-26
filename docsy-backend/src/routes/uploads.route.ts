@@ -3,10 +3,10 @@ import multer from 'multer';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { Types } from 'mongoose';
-import Document from '../models/document.model';
-import { extractTextFromPDF, chunkTextByPage } from '../services/pdfService';
-import { generateEmbeddings } from '../services/embeddingService';
-import { getPineconeIndex } from '../configs/pinecone';
+import Document from '../models/document.model.js';
+import { extractTextFromPDF, chunkTextByPage } from '../services/pdfService.js';
+import { generateEmbeddings } from '../services/embeddingService.js';
+import { getPineconeIndex } from '../configs/pinecone.js';
 import { PineconeVector } from '../types/index.js';
 
 const uploadRoutes = express.Router();

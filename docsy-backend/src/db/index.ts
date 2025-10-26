@@ -1,5 +1,5 @@
 import mongoose from 'mongoose';
-import { initializePinecone } from '../configs/pinecone';
+import { initializePinecone } from '../configs/pinecone.js';
 
 const connectDB = async (): Promise<void> => {
   try {
