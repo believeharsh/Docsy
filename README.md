@@ -1,132 +1,237 @@
-# 📄 Doscy - Chat with your PDFs
 
-A modern, beautiful web application that lets you upload PDF documents and chat with them using AI-powered analysis.
+# Doscy — Chat with Your PDFs
 
-## ✨ Features
+**Doscy** is a full-stack web application that allows users to upload PDF documents and interact with them using AI-driven chat. It enables users to ask questions in natural language and receive precise, citation-backed responses derived directly from document content.
 
-- 🎨 **Beautiful UI** - Glassmorphism design with smooth animations
-- 📱 **Responsive** - Works perfectly on mobile, tablet, and desktop
-- 🤖 **AI-Powered** - Smart document analysis with accurate answers
-- 📑 **PDF Viewer** - Built-in PDF viewer with zoom and navigation
-- 🔍 **Citations** - Click on page numbers to jump to relevant sections
-- 💬 **Chat Interface** - Natural conversation with your documents
+With a clean, responsive interface and integrated PDF viewer, Doscy provides a modern, seamless, and intelligent way to explore and understand documents.
 
-## 🚀 Getting Started
+---
 
-### Prerequisites
+## Table of Contents
 
-- Node.js 18+ 
-- npm or yarn
-- Backend API running (see backend repository)
+1. [Overview](#overview)
+2. [Features](#features)
+3. [Tech Stack](#tech-stack)
+4. [Project Structure](#project-structure)
+5. [Getting Started](#getting-started)
 
-### Installation
+   * [Prerequisites](#prerequisites)
+   * [Installation Steps](#installation-steps)
+6. [Building for Production](#building-for-production)
+7. [Configuration](#configuration)
 
-1. **Clone the repository**
-```bash
-git clone <your-repo-url>
-cd doscy-frontend
-```
+   * [Environment Variables](#environment-variables)
+   * [Expected API Endpoints](#expected-api-endpoints)
+8. [Design System](#design-system)
 
-2. **Install dependencies**
-```bash
-npm install
-```
+   * [Colors](#colors)
+   * [Typography](#typography)
+9. [Screenshots](#screenshots)
+10. [Contributing](#contributing)
+11. [License](#license)
+12. [Acknowledgments](#acknowledgments)
 
-3. **Configure environment**
-```bash
-cp .env.example .env
-```
-Edit `.env` and set your backend API URL:
-```
-VITE_API_URL=http://localhost:8000/api
-```
+---
 
-4. **Start development server**
-```bash
-npm run dev
-```
+## Overview
 
-The app will open at `http://localhost:3000`
+Doscy simplifies document analysis by combining text parsing, semantic understanding, and conversational AI. Instead of manually reading through lengthy PDFs, users can query their documents naturally and receive accurate, contextual answers.
 
-## 📦 Build for Production
+The application also includes citation mapping, allowing users to click page references and directly navigate to the relevant section within the PDF viewer.
 
-```bash
-npm run build
-```
+---
 
-The optimized production build will be in the `dist/` folder.
+## Features
 
-## 🛠️ Tech Stack
+* **Modern and Minimal UI** — Designed with glassmorphism and subtle animations.
+* **Responsive Design** — Fully adaptive layout for desktop, tablet, and mobile devices.
+* **AI-Powered Responses** — Answers are generated contextually from the document.
+* **Built-In PDF Viewer** — Supports zooming, scrolling, and page navigation.
+* **Citations and References** — Answers include linked page numbers for verification.
+* **Interactive Chat Interface** — Enables a natural conversation flow.
 
-- **React 18** - UI library
-- **TypeScript** - Type safety
-- **Vite** - Build tool
-- **Tailwind CSS** - Styling
-- **react-pdf** - PDF rendering
-- **Axios** - API calls
-- **Lucide React** - Icons
+---
 
-## 📁 Project Structure
+## Tech Stack
+
+| Layer              | Technology         |
+| ------------------ | ------------------ |
+| Frontend Framework | React 18           |
+| Language           | TypeScript         |
+| Build Tool         | Vite               |
+| Styling            | Tailwind CSS       |
+| PDF Rendering      | react-pdf (PDF.js) |
+| HTTP Client        | Axios              |
+| Icons              | Lucide React       |
+
+---
+
+## Project Structure
 
 ```
 src/
-├── components/          # React components
+├── components/          # Reusable UI components
 │   ├── ChatInterface.tsx
 │   ├── PDFViewer.tsx
 │   ├── FileUpload.tsx
 │   ├── Message.tsx
 │   ├── CitationButton.tsx
 │   └── LoadingSpinner.tsx
-├── context/            # State management
+├── context/             # Global state management
 │   └── AppContext.tsx
-├── services/           # API integration
+├── services/            # API integration and requests
 │   └── api.ts
-├── types/              # TypeScript definitions
+├── types/               # TypeScript interfaces and type definitions
 │   └── index.ts
-├── App.tsx             # Main app component
-├── main.tsx            # Entry point
-└── index.css           # Global styles
+├── App.tsx              # Root application component
+├── main.tsx             # Application entry point
+└── index.css            # Global styles
 ```
-
-## 🎨 Design System
-
-### Colors
-- **Primary:** `#6366f1` (Indigo)
-- **Secondary:** `#8b5cf6` (Purple)
-- **Success:** `#10b981` (Green)
-- **Background:** `#ffffff` (White)
-- **Surface:** `#f9fafb` (Light gray)
-
-### Typography
-- **Font Family:** Inter
-- **Sizes:** Responsive scale from 12px to 36px
-
-## 🔧 Configuration
-
-### Environment Variables
-
-- `VITE_API_URL` - Backend API base URL
-
-### API Endpoints Expected
-
-- `POST /api/upload` - Upload PDF
-- `POST /api/chat` - Send question
-- `GET /api/upload/file/:filename` - Get PDF file
-
-## 🤝 Contributing
-
-Contributions are welcome! Please feel free to submit a Pull Request.
-
-## 📄 License
-
-MIT License - feel free to use this project for personal or commercial purposes.
-
-## 🙏 Acknowledgments
-
-- Built with React and TypeScript
-- UI inspired by modern glassmorphism design
-- PDF rendering powered by PDF.js
 
 ---
 
-**Made with ❤️ for better document interaction**
+## Getting Started
+
+### Prerequisites
+
+Before running this project, ensure the following are installed:
+
+* Node.js (version 18 or higher)
+* npm or yarn
+* A running backend API (see the backend repository)
+
+---
+
+### Installation Steps
+
+1. **Clone the repository**
+
+   ```bash
+   git clone <your-repo-url>
+   cd doscy-frontend
+   ```
+
+2. **Install dependencies**
+
+   ```bash
+   npm install
+   ```
+
+3. **Configure environment variables**
+
+   ```bash
+   cp .env.example .env
+   ```
+
+   Example `.env` file:
+
+   ```
+   VITE_API_URL=http://localhost:8000/api
+   ```
+
+4. **Start the development server**
+
+   ```bash
+   npm run dev
+   ```
+
+   The application will be available at:
+
+   ```
+   http://localhost:3000
+   ```
+
+---
+
+## Building for Production
+
+To create an optimized build for production, run:
+
+```bash
+npm run build
+```
+
+The compiled static files will be available in the `dist/` directory.
+
+---
+
+## Configuration
+
+### Environment Variables
+
+| Variable       | Description                  |
+| -------------- | ---------------------------- |
+| `VITE_API_URL` | Base URL of the backend API. |
+
+---
+
+### Expected API Endpoints
+
+| Endpoint                     | Method | Description                                              |
+| ---------------------------- | ------ | -------------------------------------------------------- |
+| `/api/upload`                | POST   | Uploads a PDF document to the server.                    |
+| `/api/chat`                  | POST   | Sends a user query and retrieves an AI-generated answer. |
+| `/api/upload/file/:filename` | GET    | Fetches a PDF file by its name.                          |
+
+---
+
+## Design System
+
+### Colors
+
+| Purpose    | Color Code |
+| ---------- | ---------- |
+| Primary    | `#6366f1`  |
+| Secondary  | `#8b5cf6`  |
+| Success    | `#10b981`  |
+| Background | `#ffffff`  |
+| Surface    | `#f9fafb`  |
+
+### Typography
+
+* **Font Family:** Inter
+* **Font Sizes:** Responsive range from 12px to 36px
+
+---
+
+## Screenshots
+
+Below are a few interface previews of **Doscy**:
+
+| Section            | Preview                                   |
+| ------------------ | ----------------------------------------- |
+| Home / Upload Page | ![Home Page](screenshots/home.png)        |
+| Chat Interface     | ![Chat Interface](screenshots/chat.png)   |
+| PDF Viewer         | ![PDF Viewer](screenshots/pdf-viewer.png) |
+
+> Place your screenshots inside a `/screenshots` folder in the project root and ensure they match the file names above.
+
+---
+
+## Contributing
+
+Contributions are welcome.
+If you would like to report a bug, suggest an enhancement, or submit a feature, please open an issue or create a pull request.
+
+---
+
+## License
+
+This project is licensed under the **MIT License**.
+You may use, modify, and distribute it for both personal and commercial projects.
+
+---
+
+## Acknowledgments
+
+* Built with React and TypeScript
+* PDF rendering powered by PDF.js
+* UI inspired by modern glassmorphism design principles
+
+---
+
+**Doscy — Designed for intelligent and seamless document interaction.**
+
+---
+
+Would you like me to format this as a **ready-to-copy `README.md` file** (with markdown syntax and link formatting preserved for GitHub)? I can give you that version next so you can just paste it into your repo directly.
