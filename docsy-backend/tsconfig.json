@@ -11,7 +11,7 @@
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "lib": ["es2020", "dom"],
-    "types": ["node", "express", "multer"]
+    "types": ["node"]
   },
   "include": ["src/**/*"],
   "exclude": ["node_modules", "dist"]
