@@ -3,7 +3,7 @@
 A full-stack AI-powered application that lets you upload PDFs and chat with them using natural language. Get instant answers with page citations directly from your documents.
 
 **Live Application:** [Docsy](https://docsy-122m.onrender.com)  
-**Repository:** [github.com/believeharsh/Cravo](https://github.com/believeharsh/Docsy)
+**Repository:** [GitHub-Docsy](https://github.com/believeharsh/Docsy)
 
 ![Docsy Banner](./assets/screenshots/Landing_upload_screen_docsy.png)
 
