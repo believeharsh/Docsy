@@ -254,7 +254,7 @@ if (USE_CLOUDINARY) {
 
   const cloudinaryStorage = new CloudinaryStorage({
     cloudinary: cloudinary,
-    params: async (req, file) => {
+    params: async (req: Request, file: Express.Multer.File) => {
       return {
         folder: 'docsy-pdfs',
         resource_type: 'raw',
@@ -266,7 +266,7 @@ if (USE_CLOUDINARY) {
 
   upload = multer({
     storage: cloudinaryStorage,
-    fileFilter: (req, file, cb) => {
+    fileFilter: (req: Request, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
       if (file.mimetype === 'application/pdf') {
         cb(null, true);
       } else {
@@ -286,10 +286,10 @@ if (USE_CLOUDINARY) {
   }
 
   const localStorage = multer.diskStorage({
-    destination: (req, file, cb) => {
+    destination: (req: Request, file: Express.Multer.File, cb: (error: Error | null, destination: string) => void) => {
       cb(null, uploadsDir);
     },
-    filename: (req, file, cb) => {
+    filename: (req: Request, file: Express.Multer.File, cb: (error: Error | null, filename: string) => void) => {
       const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
       cb(null, uniqueSuffix + '-' + file.originalname);
     },
@@ -297,7 +297,7 @@ if (USE_CLOUDINARY) {
 
   upload = multer({
     storage: localStorage,
-    fileFilter: (req, file, cb) => {
+    fileFilter: (req: Request, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
       if (file.mimetype === 'application/pdf') {
         cb(null, true);
       } else {
