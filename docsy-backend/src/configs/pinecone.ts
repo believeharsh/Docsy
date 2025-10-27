@@ -1,4 +1,3 @@
-// src/config/pinecone.ts
 import { Pinecone, Index } from '@pinecone-database/pinecone';
 
 let pineconeClient: Pinecone | null = null;

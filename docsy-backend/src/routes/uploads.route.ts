@@ -56,7 +56,7 @@ uploadRoutes.post('/', upload.single('pdf'), async (req: Request, res: Response)
 
     console.log('📄 Processing PDF:', req.file.originalname);
 
-    // 1. Write buffer to temp file for processing
+    // Write buffer to temp file for processing
     const tmpDir = os.tmpdir();
     tempFilePath = path.join(tmpDir, `${Date.now()}-${req.file.originalname}`);
     fs.writeFileSync(tempFilePath, req.file.buffer);
@@ -64,11 +64,11 @@ uploadRoutes.post('/', upload.single('pdf'), async (req: Request, res: Response)
     console.log('📝 Temp file created:', tempFilePath);
     console.log('📊 File size:', req.file.buffer.length, 'bytes');
 
-    // 2. Extract text from PDF
+    // Extract text from PDF
     const { text, numPages } = await extractTextFromPDF(tempFilePath);
     console.log(`📖 Extracted ${numPages} pages`);
 
-    // 3. Upload to Cloudinary if production
+    //  Upload to Cloudinary if production
     let cloudinaryUrl: string | undefined;
     
     if (USE_CLOUDINARY) {
@@ -84,7 +84,7 @@ uploadRoutes.post('/', upload.single('pdf'), async (req: Request, res: Response)
       console.log('✅ Uploaded to Cloudinary:', cloudinaryUrl);
     }
 
-    // 4. Create document record
+    // Create document record
     const document = new Document({
       filename: req.file.originalname,
       originalName: req.file.originalname,
@@ -98,15 +98,15 @@ uploadRoutes.post('/', upload.single('pdf'), async (req: Request, res: Response)
 
     const documentId = (document._id as Types.ObjectId).toString();
 
-    // 5. Chunk text by page
+    // Chunk text by page
     const chunks = chunkTextByPage(text, numPages);
     console.log(`✂️  Created ${chunks.length} chunks`);
 
-    // 6. Generate embeddings for chunks
+    // Generate embeddings for chunks
     console.log('🧠 Generating embeddings...');
     const embeddings = await generateEmbeddings(chunks.map(c => c.text));
 
-    // 7. Store in Pinecone
+    // Store in Pinecone
     console.log('💾 Storing in Pinecone...');
     const index = getPineconeIndex();
     const vectors: PineconeVector[] = chunks.map((chunk, idx) => ({
@@ -122,13 +122,13 @@ uploadRoutes.post('/', upload.single('pdf'), async (req: Request, res: Response)
 
     await index.upsert(vectors as any);
 
-    // 8. Update document status
+    // Update document status
     document.status = 'completed';
     document.processedAt = new Date();
     document.vectorIds = vectors.map(v => v.id);
     await document.save();
 
-    // 9. Cleanup temp file
+    // Cleanup temp file
     if (tempFilePath && fs.existsSync(tempFilePath)) {
       fs.unlinkSync(tempFilePath);
       console.log('🗑️  Cleaned up temp file');

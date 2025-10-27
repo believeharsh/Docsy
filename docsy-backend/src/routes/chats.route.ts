@@ -1,4 +1,3 @@
-// src/routes/chat.ts
 import express, { Request, Response } from "express";
 import { queryDocument } from "../services/chatService.js";
 import { ChatRequest } from "../types/index.js";
