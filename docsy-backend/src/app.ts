@@ -3,6 +3,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import uploadRoutes from './routes/uploads.route.js';
 import chatRoutes from './routes/chats.route.js';
+import { keepAlive } from './services/keepAlive.js';
 
 const app = express();
 
@@ -36,6 +37,12 @@ app.use(helmet());
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+
+
+if (process.env.NODE_ENV === 'production') {
+  const url = 'https://docsy-api.onrender.com';
+  keepAlive(url);
+}
 
 // Routes
 app.use('/api/upload', uploadRoutes);
