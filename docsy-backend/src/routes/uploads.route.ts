@@ -254,7 +254,7 @@ if (USE_CLOUDINARY) {
 
   const cloudinaryStorage = new CloudinaryStorage({
     cloudinary: cloudinary,
-    params: async (req: Request, file: Express.Multer.File) => {
+    params: async (req: any, file: any) => {
       return {
         folder: 'docsy-pdfs',
         resource_type: 'raw',
@@ -266,7 +266,7 @@ if (USE_CLOUDINARY) {
 
   upload = multer({
     storage: cloudinaryStorage,
-    fileFilter: (req: Request, file: Express.Multer.File, cb: multer.FileFilterCallback) => {
+    fileFilter: (req: any, file: any, cb: any) => {
       if (file.mimetype === 'application/pdf') {
         cb(null, true);
       } else {
