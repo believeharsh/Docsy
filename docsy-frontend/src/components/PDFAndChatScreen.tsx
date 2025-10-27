@@ -18,15 +18,13 @@ const PDFAndChatScreen: React.FC = () => {
     );
   }
 
-  // Get PDF URL - use pdfUrl if available (production/Cloudinary), otherwise construct local URL
+  // PDF URL - using pdfUrl if available (production/Cloudinary), otherwise constructing local URL
   const getPdfUrl = () => {
-    // If backend returned pdfUrl (Cloudinary URL in production), use it directly
     if (document.pdfUrl) {
       return document.pdfUrl;
     }
     
-    // Otherwise, construct local file URL (development)
-    const baseUrl = import.meta.env.VITE_API_URL || 'http://localhost:8000';
+    const baseUrl = import.meta.env.FRONTEND_URL || 'http://localhost:8000';
     return `${baseUrl}/api/upload/file/${document.filename}`;
   };
 
