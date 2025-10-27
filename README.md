@@ -1,68 +1,40 @@
+# Docsy — Chat with Your PDFs
 
-# Doscy — Chat with Your PDFs
+A full-stack AI-powered application that lets you upload PDFs and chat with them using natural language. Get instant answers with page citations directly from your documents.
 
-**Doscy** is a full-stack web application that allows users to upload PDF documents and interact with them using AI-driven chat. It enables users to ask questions in natural language and receive precise, citation-backed responses derived directly from document content.
-
-With a clean, responsive interface and integrated PDF viewer, Doscy provides a modern, seamless, and intelligent way to explore and understand documents.
-
----
-
-## Table of Contents
-
-1. [Overview](#overview)
-2. [Features](#features)
-3. [Tech Stack](#tech-stack)
-4. [Project Structure](#project-structure)
-5. [Getting Started](#getting-started)
-
-   * [Prerequisites](#prerequisites)
-   * [Installation Steps](#installation-steps)
-6. [Building for Production](#building-for-production)
-7. [Configuration](#configuration)
-
-   * [Environment Variables](#environment-variables)
-   * [Expected API Endpoints](#expected-api-endpoints)
-8. [Design System](#design-system)
-
-   * [Colors](#colors)
-   * [Typography](#typography)
-9. [Screenshots](#screenshots)
-10. [Contributing](#contributing)
-11. [License](#license)
-12. [Acknowledgments](#acknowledgments)
-
----
-
-## Overview
-
-Doscy simplifies document analysis by combining text parsing, semantic understanding, and conversational AI. Instead of manually reading through lengthy PDFs, users can query their documents naturally and receive accurate, contextual answers.
-
-The application also includes citation mapping, allowing users to click page references and directly navigate to the relevant section within the PDF viewer.
+![Docsy Banner](./assets/screenshots/Landing_upload_screen_docsy.png)
 
 ---
 
 ## Features
 
-* **Modern and Minimal UI** — Designed with glassmorphism and subtle animations.
-* **Responsive Design** — Fully adaptive layout for desktop, tablet, and mobile devices.
-* **AI-Powered Responses** — Answers are generated contextually from the document.
-* **Built-In PDF Viewer** — Supports zooming, scrolling, and page navigation.
-* **Citations and References** — Answers include linked page numbers for verification.
-* **Interactive Chat Interface** — Enables a natural conversation flow.
+- **AI-Powered Chat** — Ask questions and get contextual answers from your PDFs
+- **Smart Citations** — Click page numbers to jump to relevant sections
+- **Built-in PDF Viewer** — Zoom, scroll, and navigate seamlessly
+- **Modern UI** — Clean design with glassmorphism and smooth animations
+- **Fully Responsive** — Works on desktop, tablet, and mobile
 
 ---
 
 ## Tech Stack
 
-| Layer              | Technology         |
-| ------------------ | ------------------ |
-| Frontend Framework | React 18           |
-| Language           | TypeScript         |
-| Build Tool         | Vite               |
-| Styling            | Tailwind CSS       |
-| PDF Rendering      | react-pdf (PDF.js) |
-| HTTP Client        | Axios              |
-| Icons              | Lucide React       |
+### Frontend
+
+- **React 18** + **TypeScript**
+- **Vite** (build tool)
+- **Tailwind CSS** (styling)
+- **react-pdf** (PDF rendering)
+- **Axios** (API client)
+- **Lucide React** (icons)
+
+### Backend
+
+- **Node.js** + **Express**
+- **MongoDB** (document metadata)
+- **Cloudinary** (PDF storage)
+- **Pinecone** (vector database)
+- **HuggingFace** (text embeddings)
+- **Groq** (AI chat responses)
 
 ---
 
@@ -70,22 +42,12 @@ The application also includes citation mapping, allowing users to click page ref
 
 ```
 src/
-├── components/          # Reusable UI components
-│   ├── ChatInterface.tsx
-│   ├── PDFViewer.tsx
-│   ├── FileUpload.tsx
-│   ├── Message.tsx
-│   ├── CitationButton.tsx
-│   └── LoadingSpinner.tsx
+├── components/          # UI components (Chat, PDFViewer, FileUpload, etc.)
 ├── context/             # Global state management
-│   └── AppContext.tsx
-├── services/            # API integration and requests
-│   └── api.ts
-├── types/               # TypeScript interfaces and type definitions
-│   └── index.ts
-├── App.tsx              # Root application component
-├── main.tsx             # Application entry point
-└── index.css            # Global styles
+├── services/            # API integration (api.ts)
+├── types/               # TypeScript definitions
+├── App.tsx              # Root component
+└── main.tsx             # Entry point
 ```
 
 ---
@@ -94,21 +56,17 @@ src/
 
 ### Prerequisites
 
-Before running this project, ensure the following are installed:
+- Node.js 18+
+- npm or yarn
+- Backend API running (see backend setup)
 
-* Node.js (version 18 or higher)
-* npm or yarn
-* A running backend API (see the backend repository)
-
----
-
-### Installation Steps
+### Installation
 
 1. **Clone the repository**
 
    ```bash
    git clone <your-repo-url>
-   cd doscy-frontend
+   cd docsy-frontend
    ```
 
 2. **Install dependencies**
@@ -119,119 +77,123 @@ Before running this project, ensure the following are installed:
 
 3. **Configure environment variables**
 
-   ```bash
-   cp .env.example .env
+   Create a `.env` file:
+
+   ```env
+   VITE_API_URL=http://localhost:5000
    ```
 
-   Example `.env` file:
-
-   ```
-   VITE_API_URL=http://localhost:8000/api
-   ```
-
-4. **Start the development server**
+4. **Start development server**
 
    ```bash
    npm run dev
    ```
 
-   The application will be available at:
+   App runs at: `http://localhost:5173`
 
-   ```
-   http://localhost:3000
-   ```
+---
+
+## Backend Setup
+
+### Environment Variables
+
+Create `.env` in backend directory:
+
+```env
+# Database
+MONGODB_URI=your_mongodb_connection_string
+
+# Cloudinary (PDF Storage)
+CLOUDINARY_CLOUD_NAME=your_cloud_name
+CLOUDINARY_API_KEY=your_api_key
+CLOUDINARY_API_SECRET=your_api_secret
+
+# Pinecone (Vector Database)
+PINECONE_API_KEY=your_pinecone_key
+PINECONE_INDEX_NAME=your_index_name
+
+# AI Services
+HUGGINGFACE_API_KEY=your_huggingface_key
+GROQ_API_KEY=your_groq_key
+
+# App Config
+CLIENT_URL=http://localhost:5173
+NODE_ENV=development
+```
+
+### Start Backend
+
+```bash
+cd backend
+npm install
+npm run dev
+```
+
+Backend runs at: `http://localhost:5000`
 
 ---
 
 ## Building for Production
 
-To create an optimized build for production, run:
-
 ```bash
 npm run build
 ```
 
-The compiled static files will be available in the `dist/` directory.
-
----
-
-## Configuration
-
-### Environment Variables
-
-| Variable       | Description                  |
-| -------------- | ---------------------------- |
-| `VITE_API_URL` | Base URL of the backend API. |
-
----
-
-### Expected API Endpoints
-
-| Endpoint                     | Method | Description                                              |
-| ---------------------------- | ------ | -------------------------------------------------------- |
-| `/api/upload`                | POST   | Uploads a PDF document to the server.                    |
-| `/api/chat`                  | POST   | Sends a user query and retrieves an AI-generated answer. |
-| `/api/upload/file/:filename` | GET    | Fetches a PDF file by its name.                          |
+Output will be in the `dist/` directory.
 
 ---
 
 ## Design System
 
-### Colors
+| Element   | Value     |
+| --------- | --------- |
+| Primary   | `#6366f1` |
+| Secondary | `#8b5cf6` |
+| Success   | `#10b981` |
+| Font      | Inter     |
 
-| Purpose    | Color Code |
-| ---------- | ---------- |
-| Primary    | `#6366f1`  |
-| Secondary  | `#8b5cf6`  |
-| Success    | `#10b981`  |
-| Background | `#ffffff`  |
-| Surface    | `#f9fafb`  |
+---
 
-### Typography
+## API Endpoints
 
-* **Font Family:** Inter
-* **Font Sizes:** Responsive range from 12px to 36px
+| Endpoint                     | Method | Description                 |
+| ---------------------------- | ------ | --------------------------- |
+| `/api/upload`                | POST   | Upload PDF document         |
+| `/api/chat`                  | POST   | Send query, get AI response |
+| `/api/upload/file/:filename` | GET    | Retrieve uploaded PDF       |
+| `/health`                    | GET    | Server health check         |
 
 ---
 
 ## Screenshots
 
-Below are a few interface previews of **Doscy**:
-
-| Section            | Preview                                   |
-| ------------------ | ----------------------------------------- |
-| Home / Upload Page | ![Home Page](screenshots/home.png)        |
-| Chat Interface     | ![Chat Interface](screenshots/chat.png)   |
-| PDF Viewer         | ![PDF Viewer](screenshots/pdf-viewer.png) |
-
-> Place your screenshots inside a `/screenshots` folder in the project root and ensure they match the file names above.
+| Feature                | Preview                                                         |
+| ---------------------- | --------------------------------------------------------------- |
+| Upload Screen          | ![Upload](./assets/screenshots/Landing_upload_screen_docsy.png) |
+| Chat And PDF Interface | ![Chat](./assets//screenshots/ChatPDF_screen_docsy.png)         |
 
 ---
 
 ## Contributing
 
-Contributions are welcome.
-If you would like to report a bug, suggest an enhancement, or submit a feature, please open an issue or create a pull request.
+Contributions are welcome! Feel free to open issues or submit pull requests.
 
 ---
 
 ## License
 
-This project is licensed under the **MIT License**.
-You may use, modify, and distribute it for both personal and commercial projects.
+MIT License - feel free to use for personal or commercial projects.
 
 ---
 
 ## Acknowledgments
 
-* Built with React and TypeScript
-* PDF rendering powered by PDF.js
-* UI inspired by modern glassmorphism design principles
+- PDF rendering powered by **PDF.js**
+- AI responses via **Groq**
+- Embeddings from **HuggingFace**
+- PDF storage on **Cloudinary**
+- Vector search with **Pinecone**
 
 ---
 
-**Doscy — Designed for intelligent and seamless document interaction.**
-
----
-
-Would you like me to format this as a **ready-to-copy `README.md` file** (with markdown syntax and link formatting preserved for GitHub)? I can give you that version next so you can just paste it into your repo directly.
+** Built By Harsh Dahiya associated with Playpower Labs ❤️ **
